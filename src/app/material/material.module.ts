@@ -31,6 +31,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { LayoutModule } from '@angular/cdk/layout';
 
 const materialComponents = [
   MatButtonModule,
@@ -64,7 +65,8 @@ const materialComponents = [
   MatPaginatorModule,
   MatBadgeModule,
   MatDatepickerModule,
-  MatBottomSheetModule
+  MatBottomSheetModule,
+  LayoutModule
 ];
 
 @NgModule({

@@ -1,12 +1,48 @@
-<mat-toolbar color="accent">
-    <span [routerLink]="[ '/']">
-        RECLAMOS
-    </span>
-    <span [routerLink]="[ '/']">
-        NUEVO RECLAMO
-    </span>
-    <span [routerLink]="[ '/']">
-        LOG OUT
-    </span>
-    
-  </mat-toolbar>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav role="navigation">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/home">
+        <mat-icon>home</mat-icon> <span class="nav-caption">Home</span>
+      </a>
+      <a mat-list-item routerLink="/owner">
+        <mat-icon>receipt</mat-icon>
+        <span class="nav-caption">Reclamos</span>
+      </a>
+      <a mat-list-item routerLink="#">
+        <mat-icon>note_add</mat-icon
+        ><span class="nav-caption">Agregar Reclamo</span>
+      </a>
+      <a mat-list-item routerLink="#">
+        <mat-icon>exit_to_app</mat-icon><span class="nav-caption">Logout</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <div fxHide.gt-xs>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <div>
+        <a routerLink="/home">ReclamosAPP</a>
+      </div>
+      <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+        <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+          <li>
+            <button mat-button>Reclamos</button>
+          </li>
+          <li>
+            <button mat-button>Agregar Reclamo</button>
+          </li>
+          <li>
+            <button mat-flat-button color="accent">Logout</button>
+          </li>
+        </ul>
+      </div>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

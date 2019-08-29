@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
