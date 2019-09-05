@@ -8,13 +8,15 @@ import { HomeComponent } from './components/home/home.component';
 import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReclamosComponent } from './components/reclamos/reclamos.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    ReclamosComponent
   ],
   imports: [
     AppRoutingModule,
