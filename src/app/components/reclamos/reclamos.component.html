@@ -1,9 +1,8 @@
-<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+<table id="tablaReclamos" mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
     <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
         <th mat-header-cell *matHeaderCellDef> {{column}} </th>
         <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
     </ng-container>
-
     <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
     <ng-container matColumnDef="expandedDetail">
         <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
@@ -14,11 +13,9 @@
                     <div class="estado"> {{element.estado}} </div>
                     <div class="fecha"> {{element.fecha}} </div>
                 </div>
-                <div class="detalle">
-                    {{element.descripcion}},
-                    {{element.nroOrden}},
-                    {{element.operador}}
-                </div>
+                <div class="descripcion"> {{element.descripcion}} </div>
+                <div class="nroOrden"> {{element.nroOrden}} </div>
+                <div class="operador"> {{element.operador}} </div>
             </div>
         </td>
     </ng-container>

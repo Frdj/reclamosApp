@@ -47,7 +47,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ReclamosComponent implements OnInit {
   dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['id', 'cliente', 'estado', 'fecha'];
+  columnsToDisplay = ['ID', 'Cliente', 'Estado', 'Fecha'];
   expandedElement: PeriodicElement | null;
 
   constructor() { }
