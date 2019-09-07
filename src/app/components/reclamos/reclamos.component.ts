@@ -1,34 +1,74 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 export interface PeriodicElement {
-  id: number;
-  cliente: string;
-  estado: string;
-  fecha: string;
-  descripcion: string;
-  nroOrden: number;
-  operador: string;
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+  description: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {
-    id: 1,
-    cliente: 'nico',
-    estado: 'Ingresado',
-    fecha:'15/11/1997',
-    descripcion: 'producto lacteo en mal estado',
-    nroOrden: 123,
-    operador: 'alex'
+    position: 1,
+    name: 'Hydrogen',
+    weight: 1.0079,
+    symbol: 'H',
+    description: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
+        atomic weight of 1.008, hydrogen is the lightest element on the periodic table.`
+  }, {
+    position: 2,
+    name: 'Helium',
+    weight: 4.0026,
+    symbol: 'He',
+    description: `Helium is a chemical element with symbol He and atomic number 2. It is a
+        colorless, odorless, tasteless, non-toxic, inert, monatomic gas, the first in the noble gas
+        group in the periodic table. Its boiling point is the lowest among all the elements.`
+  }, {
+    position: 3,
+    name: 'Lithium',
+    weight: 6.941,
+    symbol: 'Li',
+    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
+        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
+        lightest solid element.`
   },
   {
-    id: 2,
-    cliente: 'santi',
-    estado: 'Pendiente',
-    fecha:'19/12/1996',
-    descripcion: 'producto plastico roto',
-    nroOrden: 456,
-    operador: 'alex'
+    position: 3,
+    name: 'Lithium',
+    weight: 6.941,
+    symbol: 'Li',
+    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
+        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
+        lightest solid element.`
+  },
+  {
+    position: 4,
+    name: 'Lithium',
+    weight: 6.941,
+    symbol: 'Li',
+    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
+        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
+        lightest solid element.`
+  },
+  {
+    position: 5,
+    name: 'Lithium',
+    weight: 6.941,
+    symbol: 'Li',
+    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
+        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
+        lightest solid element.`
+  },
+  {
+    position: 6,
+    name: 'Lithium',
+    weight: 6.941,
+    symbol: 'Li',
+    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
+        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
+        lightest solid element.`
   },
 ];
 
@@ -45,14 +85,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
     ]),
   ],
 })
-export class ReclamosComponent implements OnInit {
+export class ReclamosComponent {
   dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['ID', 'Cliente', 'Estado', 'Fecha'];
+  columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
   expandedElement: PeriodicElement | null;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }
