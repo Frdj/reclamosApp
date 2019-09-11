@@ -4,12 +4,8 @@
       <a mat-list-item routerLink="/home">
         <mat-icon>home</mat-icon> <span class="nav-caption">Home</span>
       </a>
-      <a mat-list-item routerLink="/owner">
-        <mat-icon>receipt</mat-icon>
-        <span class="nav-caption">Reclamos</span>
-      </a>
-      <a mat-list-item (click)="openDialog()">
-        <mat-icon>note_add</mat-icon><span class="nav-caption" z>Agregar Reclamo</span>
+      <a mat-list-item routerLink="#">
+        <mat-icon>note_add</mat-icon><span class="nav-caption">Agregar Reclamo</span>
       </a>
       <a mat-list-item routerLink="#">
         <mat-icon>exit_to_app</mat-icon><span class="nav-caption">Logout</span>
@@ -30,10 +26,7 @@
       <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
         <ul fxLayout fxLayoutGap="15px" class="navigation-items">
           <li>
-            <button mat-button>Reclamos</button>
-          </li>
-          <li>
-            <button mat-button (click)="openDialog()">Agregar Reclamo</button>
+            <button mat-button>Agregar Reclamo</button>
           </li>
           <li>
             <button mat-flat-button color="accent">Logout</button>
