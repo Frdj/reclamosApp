@@ -8,13 +8,15 @@ import { HomeComponent } from './components/home/home.component';
 import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CrearReclamoComponent } from './components/crear-reclamo/crear-reclamo.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    CrearReclamoComponent
   ],
   imports: [
     AppRoutingModule,
@@ -24,6 +26,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    CrearReclamoComponent
+  ]
 })
 export class AppModule { }
