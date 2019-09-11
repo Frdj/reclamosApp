@@ -1,4 +1,7 @@
-import { Component} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 export interface PeriodicElement {
@@ -85,8 +88,16 @@ const ELEMENT_DATA: PeriodicElement[] = [
     ]),
   ],
 })
-export class ReclamosComponent {
-  dataSource = ELEMENT_DATA;
+export class ReclamosComponent implements OnInit{
+  dataSource =  new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
   expandedElement: PeriodicElement | null;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  ngOnInit(){
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 }
