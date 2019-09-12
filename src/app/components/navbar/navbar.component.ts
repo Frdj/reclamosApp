@@ -29,9 +29,9 @@ export class NavbarComponent {
       data: { name: '', animal: '' }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    // });
   }
 
 }

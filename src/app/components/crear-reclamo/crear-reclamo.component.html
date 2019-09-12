@@ -1,17 +1,17 @@
-<form class="example-form">
+<form class="example-form" ngNativeValidate [formGroup]="formulario" (ngSubmit)="crearReclamo()" >
     <mat-form-field class="example-full-width">
-        <input matInput placeholder="Nombre y Apellido del Cliente">
+        <input matInput placeholder="Nombre y Apellido del Cliente" required formControlName="cliente">
     </mat-form-field>
     <mat-form-field class="example-full-width">
-        <input type="number" matInput placeholder="Número de Orden">
+        <input type="number" matInput placeholder="Número de Orden" required formControlName="nroOrden">
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Descripción"></textarea>
+        <textarea matInput placeholder="Descripción" required formControlName="descripcion"></textarea>
     </mat-form-field>
 
     <div fxLayout="row" fxLayoutAlign="end center" mat-dialog-actions>
-        <button mat-stroked-button color="primary">Cancelar</button>
+        <button mat-stroked-button color="primary" (click)="dialogRef.close()">Cancelar</button>
         <button mat-raised-button color="primary" type="submit" cdkFocusInitial>Crear</button>
     </div>
 </form>

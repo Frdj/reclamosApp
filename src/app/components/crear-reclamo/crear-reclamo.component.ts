@@ -25,7 +25,7 @@ export class CrearReclamoComponent implements OnInit {
   }
 
   crearReclamo() {
-    console.log('Crear');
+    console.log(this.formulario.value);
   }
 
 }
