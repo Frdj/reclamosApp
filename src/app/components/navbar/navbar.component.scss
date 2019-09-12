@@ -39,8 +39,9 @@ a:active {
 
 #logout{
   color:#eceff1;
-  background-color: #004d40;
-  font-weight: 600;
+  background-color: #BF3A00;
+  font-weight: 500;
+  font-family: 'Varela Round';
 }
 
 #navbar{
@@ -49,7 +50,14 @@ a:active {
 }
 
 #agregarRec{
-  background-color: #00897b;
+  background-color: #007363;
   color: #eceff1;
-  font-weight: 600;
+  font-weight: 500;
+  font-family: 'Varela Round';
+}
+
+#botonHome{
+  color: #eceff1;
+  font-weight: 500;
+  font-family: 'Varela Round';
 }
