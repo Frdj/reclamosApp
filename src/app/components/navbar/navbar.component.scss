@@ -36,3 +36,20 @@ a:active {
   display: inline-block;
   padding-left: 6px;
 }
+
+#logout{
+  color:#eceff1;
+  background-color: #004d40;
+  font-weight: 600;
+}
+
+#navbar{
+  box-shadow: 0 4px 4px rgba(#000, 0.2), 
+    0 1px 1px rgba(#000, 0.2);
+}
+
+#agregarRec{
+  background-color: #00897b;
+  color: #eceff1;
+  font-weight: 600;
+}

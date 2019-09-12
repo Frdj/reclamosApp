@@ -14,7 +14,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar id="navbar" color="primary">
       <div fxHide.gt-xs>
         <button mat-icon-button (click)="sidenav.toggle()">
           <mat-icon>menu</mat-icon>
@@ -26,10 +26,10 @@
       <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
         <ul fxLayout fxLayoutGap="15px" class="navigation-items">
           <li>
-            <button mat-button>Agregar Reclamo</button>
+            <button mat-flat-button id="agregarRec">Agregar Reclamo</button>
           </li>
           <li>
-            <button mat-flat-button color="accent">Logout</button>
+            <button mat-flat-button id="logout">Logout</button>
           </li>
         </ul>
       </div>
