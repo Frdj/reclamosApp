@@ -10,7 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CrearReclamoComponent } from './components/crear-reclamo/crear-reclamo.component';
 import { ReclamosComponent } from './components/reclamos/reclamos.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import { ReclamosComponent } from './components/reclamos/reclamos.component';
     BrowserAnimationsModule,
     BrowserModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
