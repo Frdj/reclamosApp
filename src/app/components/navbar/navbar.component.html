@@ -1,9 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav role="navigation">
     <mat-nav-list>
-      <a mat-list-item routerLink="/home">
-        <mat-icon>home</mat-icon> <span class="nav-caption">Home</span>
-      </a>
       <a mat-list-item routerLink="#">
         <mat-icon>note_add</mat-icon><span class="nav-caption">Agregar Reclamo</span>
       </a>
@@ -14,22 +11,22 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar id="navbar" color="primary">
       <div fxHide.gt-xs>
         <button mat-icon-button (click)="sidenav.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
       </div>
       <div>
-        <a routerLink="/home">ReclamosAPP</a>
+        <a id="botonHome" routerLink="/home">ReclamosAPP</a>
       </div>
       <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
         <ul fxLayout fxLayoutGap="15px" class="navigation-items">
           <li>
-            <button mat-button (click)="openDialog()">Agregar Reclamo</button>
+            <button mat-button id="agregarRec" (click)="openDialog()">Agregar Reclamo</button>
           </li>
           <li>
-            <button mat-flat-button color="accent">Logout</button>
+            <button mat-button id="logout">Logout</button>
           </li>
         </ul>
       </div>
