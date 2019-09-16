@@ -1,80 +1,19 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ReclamosService } from 'src/app/services/reclamos.service';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-  description: string;
+export interface Reclamo {
+  id: number;
+  fecha: string;
+  descripcion: string;
+  nroOrden: number;
+  fuente: string;
+  estado: number;
+  usuario: number;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    position: 1,
-    name: 'Hydrogen',
-    weight: 1.0079,
-    symbol: 'H',
-    description: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
-        atomic weight of 1.008, hydrogen is the lightest element on the periodic table.`
-  }, {
-    position: 2,
-    name: 'Helium',
-    weight: 4.0026,
-    symbol: 'He',
-    description: `Helium is a chemical element with symbol He and atomic number 2. It is a
-        colorless, odorless, tasteless, non-toxic, inert, monatomic gas, the first in the noble gas
-        group in the periodic table. Its boiling point is the lowest among all the elements.`
-  }, {
-    position: 3,
-    name: 'Lithium',
-    weight: 6.941,
-    symbol: 'Li',
-    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
-        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
-        lightest solid element.`
-  },
-  {
-    position: 3,
-    name: 'Lithium',
-    weight: 6.941,
-    symbol: 'Li',
-    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
-        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
-        lightest solid element.`
-  },
-  {
-    position: 4,
-    name: 'Lithium',
-    weight: 6.941,
-    symbol: 'Li',
-    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
-        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
-        lightest solid element.`
-  },
-  {
-    position: 5,
-    name: 'Lithium',
-    weight: 6.941,
-    symbol: 'Li',
-    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
-        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
-        lightest solid element.`
-  },
-  {
-    position: 6,
-    name: 'Lithium',
-    weight: 6.941,
-    symbol: 'Li',
-    description: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
-        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
-        lightest solid element.`
-  },
-];
-
 
 @Component({
   selector: 'app-reclamos',
@@ -82,22 +21,39 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./reclamos.component.scss'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
-export class ReclamosComponent implements OnInit{
-  dataSource =  new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
-  expandedElement: PeriodicElement | null;
+export class ReclamosComponent implements OnInit {
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  reclamos: Array<Reclamo> = [];
 
-  ngOnInit(){
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  dataSource: MatTableDataSource<Reclamo>;
+  columnsToDisplay = ['id', 'fecha', 'nroOrden', 'fuente'];
+  expandedElement: Reclamo | null;
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  constructor(
+    private _reclamosService: ReclamosService
+  ) { }
+
+  ngOnInit() {
+    this._reclamosService.getReclamos()
+      .subscribe(
+        (res: Array<Reclamo>) => {
+          // se cambia formato de fecha a dd/mm/yyyy
+          res.map(reclamo => {
+            reclamo.fecha = new Date(reclamo.fecha).toLocaleDateString();
+          })
+          this.dataSource = new MatTableDataSource<Reclamo>(res);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }
+      )
   }
 }

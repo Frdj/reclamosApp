@@ -11,6 +11,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CrearReclamoComponent } from './components/crear-reclamo/crear-reclamo.component';
 import { ReclamosComponent } from './components/reclamos/reclamos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ReclamosService } from './services/reclamos.service';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     MaterialModule,
     FlexLayoutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ReclamosService
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     CrearReclamoComponent
