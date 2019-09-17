@@ -13,4 +13,8 @@ export class ReclamosService {
   getReclamos() {
     return this.httpClient.get('http://localhost:3000/reclamo');
   }
+
+  saveReclamo(reclamo) {
+    return this.httpClient.post('http://localhost:3000/reclamo', reclamo);
+  }
 }

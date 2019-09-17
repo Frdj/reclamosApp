@@ -8,82 +8,45 @@
   font-family: 'Varela Round';
   cursor: pointer;
 }
-  
-  tr.example-detail-row {
-    height: 0;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):hover {
-    background: #a7ffeb;
-    opacity: 0.95;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-  }
-  
-  .example-element-row td {
-    border-bottom-width: 0;
-  }
-  
-  .example-element-detail {
-    overflow: hidden;
-    display: flex;
-  }
-  
-  .example-element-diagram {
-    min-width: 80px;
-    border: 2px solid black;
-    padding: 8px;
-    font-weight: lighter;
-    margin: 8px 0;
-    height: 104px;
-  }
-  
-  .example-element-symbol {
-    font-weight: bold;
-    font-size: 40px;
-    line-height: normal;
-  }
-  
-  .example-element-description {
-    padding: 16px;
-  }
-  
-  .example-element-description-attribution {
-    opacity: 0.5;
-  }
 
- #pagina{
-   //width:34%;
-   padding-left: auto;     
-   padding-right: auto;
-   margin-left: auto;
-   margin-right: auto;
-   font-family: 'Varela Round';
- }
-
-.example-element-diagram {
-  min-width: 80px;
-  border: 2px solid black;
-  padding: 8px;
-  font-weight: lighter;
-  margin: 8px 0;
-  height: 104px;
+tr.example-detail-row {
+  height: 0;
 }
 
-.example-element-symbol {
-  font-weight: bold;
-  font-size: 40px;
-  line-height: normal;
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: #a7ffeb;
+  opacity: 0.95;
 }
 
-.example-element-description {
-  padding: 16px;
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
 }
 
-.example-element-description-attribution {
-  opacity: 0.5;
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.description ul {
+  // border: 1px solid #000;
+  // padding: 1rem 1rem;
+  li {
+    margin: 1rem 1rem;
+  }
+}
+
+
+#pagina {
+  //width:34%;
+  padding-left: auto;
+  padding-right: auto;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Varela Round';
 }
 
 #pagina {

@@ -14,4 +14,11 @@ export class AppComponent {
   constructor(router: Router){
     this.router = router;
   }
+
+  onActivate(componentReference) {
+    console.log(componentReference);
+
+    // componentReference.reclamoCreado.subscribe()
+    // componentReference.anyFunction();
+ }
 }

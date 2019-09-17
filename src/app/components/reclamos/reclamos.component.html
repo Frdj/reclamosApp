@@ -1,27 +1,64 @@
-<table mat-table id="tablaReclamos" [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
-  <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay">
+<table
+  mat-table
+  id="tablaReclamos"
+  [dataSource]="dataSource"
+  multiTemplateDataRows
+  matSort
+  class="mat-elevation-z8"
+>
+  <ng-container
+    matColumnDef="{{ column }}"
+    *ngFor="let column of columnsToDisplay"
+  >
     <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
     <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
   </ng-container>
 
   <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
   <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-      <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-        <div class="example-element-description">
-          {{ element.descripcion }}
+    <td
+      mat-cell
+      *matCellDef="let element"
+      [attr.colspan]="columnsToDisplay.length"
+    >
+      <div
+        class="example-element-detail"
+        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
+      >
+        <div class="description">
+          <ul>
+            <li>Estado: {{ element.estado.descripcion | uppercase }}</li>
+            <li>
+              Usuario: {{ element.usuario.nombre | uppercase }} -
+              {{ element.usuario.email }}
+            </li>
+            <li>Descripción: {{ element.descripcion }}</li>
+          </ul>
         </div>
       </div>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplay" class="example-element-row"
+  <tr
+    mat-row
+    *matRowDef="let element; columns: columnsToDisplay"
+    class="example-element-row"
     [class.example-expanded-row]="expandedElement === element"
-    (click)="expandedElement = expandedElement === element ? null : element"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    (click)="expandedElement = expandedElement === element ? null : element"
+  ></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: ['expandedDetail']"
+    class="example-detail-row"
+  ></tr>
 </table>
 
 <div fxLayout fxLayoutAlign="center center">
-  <mat-paginator fxFlex.lt-sm="300px" id="pagina" [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator
+    fxFlex.lt-sm="300px"
+    id="pagina"
+    [pageSizeOptions]="[10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>
