@@ -1,11 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav role="navigation">
     <mat-nav-list>
-      <a mat-list-item routerLink="/home">
-        <mat-icon>home</mat-icon> <span class="nav-caption">Home</span>
-      </a>
       <a mat-list-item (click)="openDialog(); sidenav.toggle()">
-        <mat-icon>note_add</mat-icon><span class="nav-caption">Agregar Reclamo</span>
+        <mat-icon>note_add</mat-icon><span class="nav-caption">Agregar
+          Reclamo</span>
       </a>
       <a mat-list-item routerLink="">
         <mat-icon>exit_to_app</mat-icon><span class="nav-caption">Logout</span>

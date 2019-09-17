@@ -7,11 +7,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { MaterialModule } from './material/material.module';
+import { MaterialModule } from './material/material.module';s
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CrearReclamoComponent } from './components/crear-reclamo/crear-reclamo.component';
 import { ReclamosComponent } from './components/reclamos/reclamos.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ReclamosService } from './services/reclamos.service';
 
 @NgModule({
   declarations: [
@@ -27,9 +29,12 @@ import { ReclamosComponent } from './components/reclamos/reclamos.component';
     BrowserModule,
     MaterialModule,
     FlexLayoutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ReclamosService
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     CrearReclamoComponent
