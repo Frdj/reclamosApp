@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearReclamoComponent } from '../crear-reclamo/crear-reclamo.component';
-import { Reclamo } from '../reclamos/reclamos.component';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +11,6 @@ import { Reclamo } from '../reclamos/reclamos.component';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  @Output() reclamoCreado: EventEmitter<any> = new EventEmitter();
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -32,12 +30,10 @@ export class NavbarComponent {
       data: { name: '', animal: '' }
     });
 
-    dialogRef.componentInstance.reclamoCreado.subscribe((reclamo: Reclamo) => {
-      this.reclamoCreado.emit(reclamo);
+    dialogRef.componentInstance.reclamoCreado.subscribe(seCerro => {
+      if (seCerro) {
+        dialogRef.close();
+      }
     });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    // });
   }
 }

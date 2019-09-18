@@ -11,16 +11,7 @@ import {
 } from '@angular/animations';
 import { ReclamosService } from 'src/app/services/reclamos.service';
 import swal from 'sweetalert';
-
-export interface Reclamo {
-  id: number;
-  fecha: string;
-  descripcion: string;
-  nroOrden: number;
-  fuente: string;
-  estado: number;
-  usuario: number;
-}
+import { Reclamo } from 'src/app/models/reclamo';
 
 @Component({
   selector: 'app-reclamos',
@@ -39,15 +30,18 @@ export interface Reclamo {
 })
 export class ReclamosComponent implements OnInit {
   reclamos: Array<Reclamo> = [];
+  message: string;
 
-  dataSource: MatTableDataSource<Reclamo>;
+  dataSource: MatTableDataSource<Reclamo> = new MatTableDataSource<Reclamo>(
+    this.reclamos
+  );
   columnsToDisplay = ['id', 'fecha', 'nroOrden', 'fuente'];
   expandedElement: Reclamo | null;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private reclamosService: ReclamosService) {}
+  constructor(public reclamosService: ReclamosService) {}
 
   ngOnInit() {
     this.reclamosService.getReclamos().subscribe(
@@ -57,7 +51,7 @@ export class ReclamosComponent implements OnInit {
         res.map(reclamo => {
           reclamo.fecha = new Date(reclamo.fecha).toLocaleDateString();
         });
-        this.dataSource = new MatTableDataSource<Reclamo>(res);
+        this.dataSource.data = res;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
@@ -65,5 +59,15 @@ export class ReclamosComponent implements OnInit {
         swal('Error al obtener reclamos', err.message, 'error');
       }
     );
+    // Me subscribo ante cambios en la tabla
+    this.reclamosService.currentReclamo.subscribe((reclamo: Reclamo) => {
+      if (reclamo) {
+        reclamo.fecha = new Date(reclamo.fecha).toLocaleDateString();
+        this.dataSource.data.push(reclamo);
+        this.dataSource.connect().next(this.dataSource.data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    });
   }
 }
