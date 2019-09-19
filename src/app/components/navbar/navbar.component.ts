@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearReclamoComponent } from '../crear-reclamo/crear-reclamo.component';
+import { SSO } from 'src/app/global/sso';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +13,8 @@ import { CrearReclamoComponent } from '../crear-reclamo/crear-reclamo.component'
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+
+  estaLogueado: boolean;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -21,8 +25,15 @@ export class NavbarComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    public authService: AuthService
+  ) {
+    console.log('Constructor del Navbar');
+    this.authService.currentToken.subscribe(estaLogueado => {
+      this.estaLogueado = estaLogueado;
+      console.log(this.estaLogueado);
+    });
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CrearReclamoComponent, {
@@ -30,10 +41,22 @@ export class NavbarComponent {
       data: { name: '', animal: '' }
     });
 
-    dialogRef.componentInstance.reclamoCreado.subscribe(seCerro => {
-      if (seCerro) {
+    dialogRef.componentInstance.reclamoCreado.subscribe(isClosed => {
+      if (isClosed) {
         dialogRef.close();
       }
     });
+  }
+
+  logout() {
+    SSO.logout();
+    this.estaLogueado = false;
+    this.authService.setToken(false);
+  }
+
+  login() {
+    SSO.login();
+    this.estaLogueado = true;
+    this.authService.setToken(true);
   }
 }
