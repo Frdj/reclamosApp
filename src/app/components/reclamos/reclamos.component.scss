@@ -19,7 +19,7 @@ tr.example-element-row:not(.example-expanded-row):hover {
 }
 
 tr.example-element-row:not(.example-expanded-row):active {
-  background: #efefef;
+  background: #f5f5f5;
 }
 
 .example-element-row td {
@@ -49,11 +49,10 @@ tr.example-element-row:not(.example-expanded-row):active {
   font-family: 'Varela Round';
 }
 
-#pagina {
-  width: 34%;
-  padding-left: auto;
-  padding-right: auto;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: 'Varela Round';
+#eliminar{
+  color:#D84315;
+}
+
+#modificar{
+  color:#007363;
 }
