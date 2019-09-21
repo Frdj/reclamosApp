@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ReclamosService } from 'src/app/services/reclamos.service';
+import { ReclamosService } from 'src/app/services/reclamos/reclamos.service';
 import swal from 'sweetalert';
 import { Reclamo } from 'src/app/models/reclamo';
 

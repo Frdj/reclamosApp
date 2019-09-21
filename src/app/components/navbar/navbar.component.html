@@ -24,10 +24,11 @@
       <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
         <ul fxLayout fxLayoutGap="15px" class="navigation-items">
           <li>
-            <button mat-button id="agregarRec" (click)="openDialog()">Agregar Reclamo</button>
+            <button *ngIf="estaLogueado" mat-button id="agregarRec" (click)="openDialog()">Agregar Reclamo</button>
           </li>
           <li>
-            <button mat-button id="logout">Logout</button>
+            <button *ngIf="estaLogueado" mat-button id="logout" (click)="logout()">Logout</button>
+            <button *ngIf="!estaLogueado" mat-button id="logout" (click)="login()">Login</button>
           </li>
         </ul>
       </div>

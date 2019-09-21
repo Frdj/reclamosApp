@@ -11,6 +11,7 @@ export class AppComponent {
   public router: Router;
 
   constructor(router: Router) {
+    // SSO.login();
     this.router = router;
   }
 
