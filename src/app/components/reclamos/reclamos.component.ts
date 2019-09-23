@@ -37,7 +37,7 @@ export class ReclamosComponent implements OnInit {
   dataSource: MatTableDataSource<Reclamo> = new MatTableDataSource<Reclamo>(
     this.reclamos
   );
-  columnsToDisplay = ['id', 'fecha', 'nroOrden', 'fuente'];
+  columnsToDisplay = ['id', 'usuario', 'estado', 'nroOrden', 'fecha', 'modificar', 'eliminar'];
   expandedElement: Reclamo | null;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
