@@ -13,6 +13,7 @@ import { ReclamosComponent } from './components/reclamos/reclamos.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReclamosService } from './services/reclamos/reclamos.service';
 import { LogoutComponent } from './components/logout/logout.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     LogoutComponent,
     NavbarComponent,
     CrearReclamoComponent,
-    ReclamosComponent
+    ReclamosComponent,
+    LoginComponent
   ],
   imports: [
     AppRoutingModule,

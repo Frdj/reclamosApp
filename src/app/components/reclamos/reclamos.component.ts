@@ -46,7 +46,7 @@ export class ReclamosComponent implements OnInit {
   constructor(public reclamosService: ReclamosService, private authService: AuthService) {
     SSO.saveUserToken();
     this.authService.setToken(true);
-    console.log(SSO.getJWT());
+    // console.log(SSO.getJWT());
   }
 
   ngOnInit() {

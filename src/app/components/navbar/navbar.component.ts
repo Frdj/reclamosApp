@@ -50,13 +50,13 @@ export class NavbarComponent {
 
   logout() {
     SSO.logout();
-    this.estaLogueado = false;
-    this.authService.setToken(false);
+    // this.estaLogueado = false;
+    // this.authService.setToken(false);
   }
 
   login() {
     SSO.login();
-    this.estaLogueado = true;
-    this.authService.setToken(true);
+    // this.estaLogueado = true;
+    // this.authService.setToken(true);
   }
 }
