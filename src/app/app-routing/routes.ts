@@ -1,8 +1,11 @@
 import { Routes } from '@angular/router';
 import { ReclamosComponent } from '../components/reclamos/reclamos.component';
-import { LoginGuard } from '../guards/login.guard';
+import { LogoutComponent } from '../components/logout/logout.component';
+import { LoginComponent } from '../components/login/login.component';
 
 export const routes: Routes = [
-  { path: 'home', component: ReclamosComponent, canActivate: [LoginGuard] },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
+  { path: 'home', component: ReclamosComponent },
+  { path: 'logout', component: LogoutComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];

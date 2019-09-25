@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { Reclamo } from '../models/reclamo';
+import { Reclamo } from '../../models/reclamo';
 
 @Injectable({
   providedIn: 'root'

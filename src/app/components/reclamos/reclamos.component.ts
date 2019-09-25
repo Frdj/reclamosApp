@@ -9,9 +9,11 @@ import {
   transition,
   trigger
 } from '@angular/animations';
-import { ReclamosService } from 'src/app/services/reclamos.service';
+import { ReclamosService } from 'src/app/services/reclamos/reclamos.service';
 import swal from 'sweetalert';
 import { Reclamo } from 'src/app/models/reclamo';
+import { SSO } from 'src/app/global/sso';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-reclamos',
@@ -35,13 +37,17 @@ export class ReclamosComponent implements OnInit {
   dataSource: MatTableDataSource<Reclamo> = new MatTableDataSource<Reclamo>(
     this.reclamos
   );
-  columnsToDisplay = ['id', 'fecha', 'nroOrden', 'fuente'];
+  columnsToDisplay = ['id', 'usuario', 'estado', 'nroOrden', 'fecha', 'modificar', 'eliminar'];
   expandedElement: Reclamo | null;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(public reclamosService: ReclamosService) {}
+  constructor(public reclamosService: ReclamosService, private authService: AuthService) {
+    SSO.saveUserToken();
+    this.authService.setToken(true);
+    // console.log(SSO.getJWT());
+  }
 
   ngOnInit() {
     this.reclamosService.getReclamos().subscribe(

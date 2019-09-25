@@ -5,8 +5,11 @@
         <mat-icon>note_add</mat-icon><span class="nav-caption">Agregar
           Reclamo</span>
       </a>
-      <a mat-list-item routerLink="">
+      <a mat-list-item *ngIf="estaLogueado" (click)="logout()">
         <mat-icon>exit_to_app</mat-icon><span class="nav-caption">Logout</span>
+      </a>
+      <a mat-list-item  *ngIf="!estaLogueado" (click)="login()">
+        <mat-icon>exit_to_app</mat-icon><span class="nav-caption">Login</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -24,10 +27,11 @@
       <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
         <ul fxLayout fxLayoutGap="15px" class="navigation-items">
           <li>
-            <button mat-button id="agregarRec" (click)="openDialog()">Agregar Reclamo</button>
+            <button *ngIf="estaLogueado" mat-button id="agregarRec" (click)="openDialog()">Agregar Reclamo</button>
           </li>
           <li>
-            <button mat-button id="logout">Logout</button>
+            <button *ngIf="estaLogueado" mat-button id="logout" (click)="logout()">Logout</button>
+            <button *ngIf="!estaLogueado" mat-button id="logout" (click)="login()">Login</button>
           </li>
         </ul>
       </div>
