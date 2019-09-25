@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'reclamosApp';
   public router: Router;
 
   constructor(router: Router) {
