@@ -12,7 +12,7 @@ export class ReclamosService {
   private reclamoSource = new BehaviorSubject(this.reclamo);
   currentReclamo = this.reclamoSource.asObservable();
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   getReclamos() {
     return this.httpClient.get('http://localhost:3000/reclamo');
@@ -24,5 +24,9 @@ export class ReclamosService {
 
   changeReclamo(reclamo: Reclamo) {
     this.reclamoSource.next(reclamo);
+  }
+
+  delete(id: number) {
+    return this.httpClient.delete(`http://localhost:3000/reclamo/${id}`);
   }
 }

@@ -10,10 +10,11 @@ import {
   trigger
 } from '@angular/animations';
 import { ReclamosService } from 'src/app/services/reclamos/reclamos.service';
-import swal from 'sweetalert';
 import { Reclamo } from 'src/app/models/reclamo';
 import { SSO } from 'src/app/global/sso';
 import { AuthService } from 'src/app/services/auth/auth.service';
+
+declare var swal: any;
 
 @Component({
   selector: 'app-reclamos',
@@ -50,10 +51,39 @@ export class ReclamosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getReclamos();
+    // Me subscribo ante el agregado de un reclamo en la tabla
+    this.reclamosService.currentReclamo.subscribe((reclamo: Reclamo) => {
+      if (reclamo) {
+        reclamo.fecha = new Date(reclamo.fecha).toLocaleDateString();
+        this.dataSource.data.push(reclamo);
+        this.dataSource.connect().next(this.dataSource.data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    });
+  }
+
+  eliminar(element: Reclamo) {
+    swal({
+      title: '¿Está seguro?',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    })
+      .then(borrar => {
+        if (borrar) {
+          this.reclamosService.delete(element.id).subscribe(
+            (res: Reclamo) => this.getReclamos()
+          )
+        }
+      });
+  }
+
+  getReclamos() {
     this.reclamosService.getReclamos().subscribe(
       (res: Array<Reclamo>) => {
         // se cambia formato de fecha a dd/mm/yyyy
-        console.log(res);
         res.map(reclamo => {
           reclamo.fecha = new Date(reclamo.fecha).toLocaleDateString();
         });
@@ -65,15 +95,5 @@ export class ReclamosComponent implements OnInit {
         swal('Error al obtener reclamos', err.message, 'error');
       }
     );
-    // Me subscribo ante cambios en la tabla
-    this.reclamosService.currentReclamo.subscribe((reclamo: Reclamo) => {
-      if (reclamo) {
-        reclamo.fecha = new Date(reclamo.fecha).toLocaleDateString();
-        this.dataSource.data.push(reclamo);
-        this.dataSource.connect().next(this.dataSource.data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }
-    });
   }
 }

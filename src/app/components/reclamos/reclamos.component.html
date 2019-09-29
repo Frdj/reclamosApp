@@ -33,18 +33,18 @@
   </ng-container>
 
   <ng-container matColumnDef="modificar">
-      <th mat-header-cell *matHeaderCellDef> MODIFICAR </th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-button id="modificar">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+    <th mat-header-cell *matHeaderCellDef> MODIFICAR </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button id="modificar">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
 
   <ng-container matColumnDef="eliminar">
     <th mat-header-cell *matHeaderCellDef> ELIMINAR </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-button id="eliminar">
+      <button mat-button id="eliminar" (click)="eliminar(element)">
         <mat-icon>delete</mat-icon>
       </button>
     </td>
