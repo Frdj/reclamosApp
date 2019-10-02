@@ -28,17 +28,14 @@ export class NavbarComponent {
     public dialog: MatDialog,
     public authService: AuthService
   ) {
-    console.log('Constructor del Navbar');
     this.authService.currentToken.subscribe(estaLogueado => {
       this.estaLogueado = estaLogueado;
-      console.log(this.estaLogueado);
     });
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CrearReclamoComponent, {
-      width: '50%',
-      data: { name: '', animal: '' }
+      width: '50%'
     });
 
     dialogRef.componentInstance.reclamoCreado.subscribe(isClosed => {

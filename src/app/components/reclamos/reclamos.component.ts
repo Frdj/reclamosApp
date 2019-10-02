@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -13,6 +14,7 @@ import { ReclamosService } from 'src/app/services/reclamos/reclamos.service';
 import { Reclamo } from 'src/app/models/reclamo';
 import { SSO } from 'src/app/global/sso';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { ModificarReclamoComponent } from '../modificar-reclamo/modificar-reclamo.component';
 
 declare var swal: any;
 
@@ -44,7 +46,10 @@ export class ReclamosComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(public reclamosService: ReclamosService, private authService: AuthService) {
+  constructor(
+    public reclamosService: ReclamosService,
+    private authService: AuthService,
+    public dialog: MatDialog) {
     SSO.saveUserToken();
     this.authService.setToken(true);
     // console.log(SSO.getJWT());
@@ -78,6 +83,13 @@ export class ReclamosComponent implements OnInit {
           )
         }
       });
+  }
+
+  modificar(element: Reclamo) {
+    const dialogRef = this.dialog.open(ModificarReclamoComponent, {
+      width: '50%',
+      data: element
+    });
   }
 
   getReclamos() {

@@ -26,6 +26,10 @@ export class ReclamosService {
     this.reclamoSource.next(reclamo);
   }
 
+  update(id: number, reclamo: Reclamo) {
+    return this.httpClient.put(`http://localhost:3000/reclamo/${id}`, reclamo);
+  }
+
   delete(id: number) {
     return this.httpClient.delete(`http://localhost:3000/reclamo/${id}`);
   }
