@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Reclamo } from '../../models/reclamo';
 import { environment } from '../../../environments/environment';
+import { SSO } from 'src/app/global/sso';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,12 @@ export class ReclamosService {
   private reclamoSource = new BehaviorSubject(this.reclamo);
   currentReclamo = this.reclamoSource.asObservable();
 
+  httpHeaders = new HttpHeaders().set('Authorization', SSO.getJWT());
+
   constructor(private httpClient: HttpClient) { }
 
   getReclamos() {
-    return this.httpClient.get(this.url);
+    return this.httpClient.get(this.url, { headers: this.httpHeaders });
   }
 
   saveReclamo(reclamo) {

@@ -9,7 +9,7 @@ export class AuthService {
   private tokenSource = new BehaviorSubject(false);
   currentToken = this.tokenSource.asObservable();
 
-  constructor() {}
+  constructor() { }
 
   setToken(isToken: boolean) {
     this.tokenSource.next(isToken);
