@@ -9,7 +9,6 @@ import { SSO } from 'src/app/global/sso';
   providedIn: 'root'
 })
 export class ReclamosService {
-
   url: string = environment.url;
 
   reclamo: Reclamo;
@@ -17,19 +16,19 @@ export class ReclamosService {
   currentReclamo = this.reclamoSource.asObservable();
 
   httpHeaders = new HttpHeaders({
-    'Authorization': SSO.getJWT()
+    Authorization: SSO.getJWT()
   });
 
-  constructor(private httpClient: HttpClient) {
-    console.log(this.httpHeaders);
-   }
+  constructor(private httpClient: HttpClient) {}
 
   getReclamos() {
     return this.httpClient.get(this.url, { headers: this.httpHeaders });
   }
 
   saveReclamo(reclamo) {
-    return this.httpClient.post(this.url, reclamo, { headers: this.httpHeaders });
+    return this.httpClient.post(this.url, reclamo, {
+      headers: this.httpHeaders
+    });
   }
 
   changeReclamo(reclamo: Reclamo) {
@@ -37,10 +36,14 @@ export class ReclamosService {
   }
 
   update(id: number, reclamo: Reclamo) {
-    return this.httpClient.put(`${this.url}/${id}`, reclamo, { headers: this.httpHeaders });
+    return this.httpClient.put(`${this.url}/${id}`, reclamo, {
+      headers: this.httpHeaders
+    });
   }
 
   delete(id: number) {
-    return this.httpClient.delete(`${this.url}/${id}`, { headers: this.httpHeaders });
+    return this.httpClient.delete(`${this.url}/${id}`, {
+      headers: this.httpHeaders
+    });
   }
 }

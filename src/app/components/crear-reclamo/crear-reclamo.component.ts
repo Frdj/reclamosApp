@@ -11,6 +11,7 @@ import { Reclamo } from 'src/app/models/reclamo';
   styleUrls: ['./crear-reclamo.component.scss']
 })
 export class CrearReclamoComponent implements OnInit {
+  loading: boolean;
   message: string;
   reclamo: Reclamo;
   formulario: FormGroup;
@@ -31,17 +32,22 @@ export class CrearReclamoComponent implements OnInit {
       descripcion: new FormControl(),
       nroOrden: new FormControl()
     });
+    this.loading = false;
   }
 
   crearReclamo() {
+    this.loading = true;
     this.reclamoService.saveReclamo(this.formulario.value).subscribe(
       (res: Reclamo) => {
-        console.log(res);
         swal('Reclamo creado', res.usuario.nombre, 'success');
         this.reclamoCreado.emit(true);
         this.reclamoService.changeReclamo(res);
+        this.loading = false;
       },
-      err => swal('Error al crear reclamo', err.error.message, 'error')
+      err => {
+        swal('Error al crear reclamo', err.error.message, 'error');
+        this.loading = false;
+      }
     );
   }
 }
