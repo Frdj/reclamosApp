@@ -15,19 +15,17 @@ export class ReclamosService {
   private reclamoSource = new BehaviorSubject(this.reclamo);
   currentReclamo = this.reclamoSource.asObservable();
 
-  httpHeaders = new HttpHeaders({
-    Authorization: SSO.getJWT()
-  });
+  public httpHeaders = new HttpHeaders();
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   getReclamos() {
-    return this.httpClient.get(this.url, { headers: this.httpHeaders });
+    return this.httpClient.get(this.url, { headers: this.httpHeaders.append('Authorization', SSO.getJWT()) });
   }
 
   saveReclamo(reclamo) {
     return this.httpClient.post(this.url, reclamo, {
-      headers: this.httpHeaders
+      headers: this.httpHeaders.append('Authorization', SSO.getJWT())
     });
   }
 
@@ -37,13 +35,13 @@ export class ReclamosService {
 
   update(id: number, reclamo: Reclamo) {
     return this.httpClient.put(`${this.url}/${id}`, reclamo, {
-      headers: this.httpHeaders
+      headers: this.httpHeaders.append('Authorization', SSO.getJWT())
     });
   }
 
   delete(id: number) {
     return this.httpClient.delete(`${this.url}/${id}`, {
-      headers: this.httpHeaders
+      headers: this.httpHeaders.append('Authorization', SSO.getJWT())
     });
   }
 }

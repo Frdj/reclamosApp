@@ -1,10 +1,10 @@
-<form class="example-form" ngNativeValidate [formGroup]="formulario" (ngSubmit)="modificar()">
+<form class="example-form" ngNativeValidate (ngSubmit)="modificar()">
 
     <!-- Estado -->
     <mat-form-field class="example-full-width">
         <mat-label>Estado</mat-label>
-        <mat-select formControlName="estado" [compareWith]="compare">
-            <mat-option *ngFor="let estado of estados" [value]="estado.id" (onChange)="data.estado.id = estado.id">
+        <mat-select [compareWith]="compare" [(ngModel)]="reclamo.estado" name="estado">
+            <mat-option *ngFor="let estado of estados" [value]="estado">
                 {{estado.descripcion}}
             </mat-option>
         </mat-select>
@@ -12,12 +12,13 @@
 
     <!-- Descripción -->
     <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Descripción" formControlName="descripcion" required></textarea>
+        <textarea matInput placeholder="Descripción" [(ngModel)]="reclamo.descripcion" name="descripcion"
+            required></textarea>
     </mat-form-field>
 
     <!-- Botones -->
     <div fxLayout="row" fxLayoutAlign="end center" mat-dialog-actions>
-        <button mat-stroked-button id='cancelar' [mat-dialog-close]>Cancelar</button>
+        <button mat-stroked-button id="cancelar" [mat-dialog-close]>Cancelar</button>
         <button mat-raised-button id="modificar" type="submit" cdkFocusInitial>Modificar</button>
     </div>
 </form>
