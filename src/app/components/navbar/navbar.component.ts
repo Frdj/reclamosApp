@@ -47,6 +47,10 @@ export class NavbarComponent {
 
   logout() {
     SSO.logout();
+    if (this.authService.timer) {
+      clearTimeout(this.authService.timer);
+    }
+    this.authService.timer = null;
     // this.estaLogueado = false;
     // this.authService.setToken(false);
   }
