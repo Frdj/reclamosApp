@@ -52,6 +52,8 @@ export class ReclamosComponent implements OnInit {
     public dialog: MatDialog) {
     SSO.saveUserToken();
     this.authService.setToken(true);
+    const expiracion = JSON.parse(localStorage.getItem('lscache-sso_user')).exp;
+    this.authService.autoLogout(expiracion *1000 - new Date().getTime());
     // console.log(SSO.getJWT());
   }
 
