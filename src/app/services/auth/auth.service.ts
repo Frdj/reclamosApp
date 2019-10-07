@@ -8,7 +8,7 @@ import { SSO } from '../../global/sso';
 export class AuthService {
   private tokenSource = new BehaviorSubject(false);
   currentToken = this.tokenSource.asObservable();
-  private timer: any;
+  public timer: any;
 
   constructor() { }
 
