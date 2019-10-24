@@ -68,7 +68,13 @@ export class ReclamosComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
-    });
+    });  
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
   eliminar(element: Reclamo) {
@@ -104,6 +110,9 @@ export class ReclamosComponent implements OnInit {
         this.dataSource.data = res;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.dataSource.filterPredicate = function(data, filter: string): boolean {
+          return data.id.toString() === filter || data.estado.descripcion.toLowerCase().includes(filter);     
+        };
       },
       (err: Error) => {
         swal('Error al obtener reclamos', err.message, 'error');

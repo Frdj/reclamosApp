@@ -1,3 +1,9 @@
+<div class="filtro-header">
+   <mat-form-field id="input">
+     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="#Reclamo / Estado">
+  </mat-form-field>
+</div>
+
 <table mat-table id="tablaReclamos" [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> # RECLAMO </th>
