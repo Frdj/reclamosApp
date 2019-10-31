@@ -15,6 +15,8 @@ export class CrearReclamoComponent implements OnInit {
   message: string;
   reclamo: Reclamo;
   formulario: FormGroup;
+  ordenes = [1,2,3,4,5,6];
+  mostrarModal = false;
 
   @Output() reclamoCreado: EventEmitter<boolean> = new EventEmitter();
 
@@ -49,5 +51,9 @@ export class CrearReclamoComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  mostrar(){
+    this.mostrarModal=true;
   }
 }
