@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { FormControl } from '@angular/forms';
+
 import {
   animate,
   state,
@@ -41,6 +43,17 @@ export class ReclamosComponent implements OnInit {
     this.reclamos
   );
   columnsToDisplay = ['id', 'nombre', 'descripcion', 'nroOrden', 'fecha', 'modificar', 'eliminar'];
+  /* Para filtrar por columna */
+  orderFilter = new FormControl();
+  idFilter = new FormControl();
+  nombreFilter = new FormControl();
+  fechaFilter = new FormControl();
+  globalFilter = '';
+
+  filteredValues = {
+    nroOrden: '', id: '', nombre:'', fecha: ''
+  };
+
   expandedElement: Reclamo | null;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -69,12 +82,38 @@ export class ReclamosComponent implements OnInit {
         this.dataSource.sort = this.sort;
       }
     });  
+
+    //Filtros
+    this.orderFilter.valueChanges.subscribe((orderFilterValue) => {
+      this.filteredValues['nroOrden'] = orderFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+
+    this.idFilter.valueChanges.subscribe((idFilterValue) => {
+      this.filteredValues['id'] = idFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+
+    this.nombreFilter.valueChanges.subscribe((nombreFilterValue) => {
+      this.filteredValues['nombre'] = nombreFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+
+    this.fechaFilter.valueChanges.subscribe((fechaFilterValue) => {
+      this.filteredValues['fecha'] = fechaFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
+
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
+    /*filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+    this.dataSource.filter = filterValue;*/
+
+    this.globalFilter = filterValue;
+    this.dataSource.filter = JSON.stringify(this.filteredValues);
+
   }
 
   eliminar(element: Reclamo) {
@@ -110,13 +149,53 @@ export class ReclamosComponent implements OnInit {
         this.dataSource.data = res;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        
         this.dataSource.filterPredicate = function(data, filter: string): boolean {
-          return data.id.toString() === filter || data.estado.descripcion.toLowerCase().includes(filter);     
-        };
+          //return data.id.toString().startsWith(filter) || data.nroOrden.toString().startsWith(filter);     
+          var globalMatch = !this.globalFilter;
+
+          if (this.globalFilter) {
+            // search all text fields
+            globalMatch = data.id.toString().trim().toLowerCase().indexOf(this.globalFilter.toLowerCase()) !== -1;
+          }
+
+          if (!globalMatch) {
+            return;
+          }
+
+          let searchString = JSON.parse(filter);
+          return data.nroOrden.toString().trim().indexOf(searchString.nroOrden) !== -1 &&
+            data.id.toString().trim().toLowerCase().indexOf(searchString.id.toLowerCase()) !== -1 &&
+            data.usuario.nombre.toString().trim().toLowerCase().indexOf(searchString.nombre.toLowerCase()) !== -1 &&
+            data.fecha.toString().trim().toLowerCase().indexOf(searchString.fecha.toLowerCase()) !== -1;
+
+            
+          };
+//        this.dataSource.filterPredicate = this.customFilterPredicate();
       },
       (err: Error) => {
         swal('Error al obtener reclamos', err.message, 'error');
       }
     );
+  }
+
+  customFilterPredicate() {
+    const myFilterPredicate = (data, filter: string): boolean => {
+      var globalMatch = !this.globalFilter;
+
+      if (this.globalFilter) {
+        // search all text fields
+        globalMatch = data.name.toString().trim().toLowerCase().indexOf(this.globalFilter.toLowerCase()) !== -1;
+      }
+
+      if (!globalMatch) {
+        return;
+      }
+
+      let searchString = JSON.parse(filter);
+      return data.position.toString().trim().indexOf(searchString.position) !== -1 &&
+        data.name.toString().trim().toLowerCase().indexOf(searchString.name.toLowerCase()) !== -1;
+    }
+    return myFilterPredicate;
   }
 }
