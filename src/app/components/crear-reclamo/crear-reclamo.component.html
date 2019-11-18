@@ -1,25 +1,36 @@
 <form class="example-form" ngNativeValidate [formGroup]="formulario" (ngSubmit)="crearReclamo()">
     <h3>NUEVO RECLAMO</h3>
     <hr>
-    <div id="buscarMail" fxLayout="row" fxLayoutAlign="end center">
+    <div>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Mail del cliente" type="email" formControlName="email">
+            <input matInput placeholder="Mail" formControlName="mail" required>
         </mat-form-field>
-        <button mat-raised-button id="buscar" type="button" (click)="mostrar()">Buscar</button>
-    </div>
-    <div *ngIf="mostrarModal">
+
         <mat-form-field class="example-full-width">
-            <mat-label>Orden de compra</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let orden of ordenes" [value]="orden">
-                    {{orden}}
-                </mat-option>
-            </mat-select>
+            <input matInput placeholder="Número de orden" formControlName="nroOrden" required>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
             <textarea matInput placeholder="Descripción" formControlName="descripcion" required></textarea>
         </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Ciudad" formControlName="ciudad" required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Provincia" formControlName="provincia" required>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Calle" formControlName="calle" required>
+            </mat-form-field>
+
+            <mat-form-field id="cp">
+                <input matInput placeholder="Código Postal" formControlName="codPostal" required>
+            </mat-form-field>
+        </div>
 
         <div fxLayout="row" fxLayoutAlign="end center" mat-dialog-actions>
             <button mat-stroked-button id='cancelar' [mat-dialog-close]>Cancelar</button>

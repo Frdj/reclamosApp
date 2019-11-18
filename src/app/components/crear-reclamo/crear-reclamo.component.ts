@@ -15,8 +15,6 @@ export class CrearReclamoComponent implements OnInit {
   message: string;
   reclamo: Reclamo;
   formulario: FormGroup;
-  ordenes = [1,2,3,4,5,6];
-  mostrarModal = false;
 
   @Output() reclamoCreado: EventEmitter<boolean> = new EventEmitter();
 
@@ -30,9 +28,13 @@ export class CrearReclamoComponent implements OnInit {
   ngOnInit() {
     // Inicializo el formulario
     this.formulario = new FormGroup({
-      email: new FormControl(),
+      mail: new FormControl(),
+      nroOrden: new FormControl(),
       descripcion: new FormControl(),
-      nroOrden: new FormControl()
+      ciudad: new FormControl(),
+      provincia: new FormControl(),
+      calle: new FormControl(),
+      codPostal: new FormControl()
     });
     this.loading = false;
   }
@@ -51,9 +53,5 @@ export class CrearReclamoComponent implements OnInit {
         this.loading = false;
       }
     );
-  }
-
-  mostrar(){
-    this.mostrarModal=true;
   }
 }
