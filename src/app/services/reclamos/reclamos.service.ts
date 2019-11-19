@@ -44,4 +44,11 @@ export class ReclamosService {
       headers: this.httpHeaders.append('Authorization', SSO.getJWT())
     });
   }
+
+  recargar() {
+    return this.httpClient.post(`${this.url}/setCron`, {"time":"ya"}, {
+      headers: this.httpHeaders.append('Authorization', SSO.getJWT())
+    });
+  }
+  
 }

@@ -1,21 +1,25 @@
 <div class="filtro-header">
-   <mat-form-field id="input">
-     <input matInput (keyup)="applyFilter($event.target.value)" [formControl]="idFilter" placeholder="#Reclamo">
+    <button mat-raised-button id="csv" (click)="recargar()"> Recargar CSV </button>
+  <mat-form-field id="input">
+    <input matInput (keyup)="applyFilter($event.target.value)" [formControl]="idFilter" placeholder="#Reclamo">
   </mat-form-field>
   <mat-form-field class="searchbox">
-    <input matInput class="form-field" (keyup)="applyFilter($event.target.value)" [formControl]="orderFilter" placeholder="#Orden">
+    <input matInput class="form-field" (keyup)="applyFilter($event.target.value)" [formControl]="orderFilter"
+      placeholder="#Orden">
   </mat-form-field>
   <mat-form-field class="searchbox">
-      <input matInput class="form-field" (keyup)="applyFilter($event.target.value)" [formControl]="nombreFilter" placeholder="Usuario">
-    </mat-form-field>
-    <mat-form-field class="searchbox">
-        <input matInput class="form-field" (keyup)="applyFilter($event.target.value)" [formControl]="fechaFilter" placeholder="Fecha">
-      </mat-form-field>
+    <input matInput class="form-field" (keyup)="applyFilter($event.target.value)" [formControl]="nombreFilter"
+      placeholder="Usuario">
+  </mat-form-field>
+  <mat-form-field class="searchbox">
+    <input matInput class="form-field" (keyup)="applyFilter($event.target.value)" [formControl]="fechaFilter"
+      placeholder="Fecha">
+  </mat-form-field>
 </div>
 
 <table mat-table id="tablaReclamos" [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
-  <ng-container matColumnDef="id">   
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>#Reclamo</th>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header># RECLAMO</th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
   </ng-container>
 
@@ -42,7 +46,7 @@
   <ng-container matColumnDef="modificar">
     <th mat-header-cell *matHeaderCellDef> MODIFICAR </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-button id="modificar" (click)="modificar(element)">
+      <button mat-icon-button id="modificar" (click)="modificar(element)">
         <mat-icon>edit</mat-icon>
       </button>
     </td>
@@ -51,7 +55,7 @@
   <ng-container matColumnDef="eliminar">
     <th mat-header-cell *matHeaderCellDef> ELIMINAR </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-button id="eliminar" (click)="eliminar(element)">
+      <button mat-icon-button id="eliminar" (click)="eliminar(element)">
         <mat-icon>delete</mat-icon>
       </button>
     </td>

@@ -179,6 +179,10 @@ export class ReclamosComponent implements OnInit {
     );
   }
 
+  recargar(){
+    this.reclamosService.recargar();
+  }
+
   customFilterPredicate() {
     const myFilterPredicate = (data, filter: string): boolean => {
       var globalMatch = !this.globalFilter;

@@ -64,7 +64,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 #input {
   font-family: 'Varela Round';
   font-size: 14px;
-  width: 11%;
+  width: 9%;
   margin-top: 20px;
   margin-left: 140px;
 }
@@ -72,7 +72,16 @@ tr.example-element-row:not(.example-expanded-row):active {
 .searchbox {
   font-family: 'Varela Round';
   font-size: 14px;
-  width: 11%;
+  width: 9%;
   margin-top: 20px;
-  margin-left: 50px;
+  margin-left: 40px;
+}
+
+#csv{
+  background-color: #007363;
+  color: #fff;
+  font-weight: 500;
+  font-family: 'Varela Round';
+  margin-left: 140px;
+  margin-right: -90px;
 }
