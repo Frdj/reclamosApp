@@ -48,12 +48,12 @@ tr.example-element-row:not(.example-expanded-row):active {
   font-family: 'Varela Round';
 }
 
-#eliminar{
-  color:#D84315;
+#eliminar {
+  color: #d84315;
 }
 
-#modificar{
-  color:#007363;
+#modificar {
+  color: #007363;
 }
 
 #filtro-header {
@@ -77,11 +77,15 @@ tr.example-element-row:not(.example-expanded-row):active {
   margin-left: 40px;
 }
 
-#csv{
+#csv {
   background-color: #007363;
   color: #fff;
   font-weight: 500;
   font-family: 'Varela Round';
   margin-left: 140px;
   margin-right: -90px;
+}
+
+mat-spinner {
+  margin-top: 3rem;
 }

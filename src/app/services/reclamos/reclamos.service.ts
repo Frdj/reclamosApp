@@ -46,9 +46,8 @@ export class ReclamosService {
   }
 
   recargar() {
-    return this.httpClient.post(`${this.url}/setCron`, {"time":"ya"}, {
+    return this.httpClient.post(`${this.url}/setCron`, { "time": "ya" }, {
       headers: this.httpHeaders.append('Authorization', SSO.getJWT())
     });
   }
-  
 }

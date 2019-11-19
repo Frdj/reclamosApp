@@ -1,5 +1,5 @@
 <div class="filtro-header">
-    <button mat-raised-button id="csv" (click)="recargar()"> Recargar CSV </button>
+  <button mat-raised-button id="csv" (click)="recargar()"> Recargar CSV </button>
   <mat-form-field id="input">
     <input matInput (keyup)="applyFilter($event.target.value)" [formControl]="idFilter" placeholder="#Reclamo">
   </mat-form-field>
@@ -17,76 +17,82 @@
   </mat-form-field>
 </div>
 
-<table mat-table id="tablaReclamos" [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header># RECLAMO</th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
+<div *ngIf="!cargandoTabla">
+  <table mat-table id="tablaReclamos" [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header># RECLAMO</th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="nombre">
-    <th mat-header-cell *matHeaderCellDef> USUARIO </th>
-    <td mat-cell *matCellDef="let element"> {{element.usuario.nombre}} </td>
-  </ng-container>
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> USUARIO </th>
+      <td mat-cell *matCellDef="let element"> {{element.usuario.nombre}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="descripcion">
-    <th mat-header-cell *matHeaderCellDef> ESTADO </th>
-    <td mat-cell *matCellDef="let element"> {{element.estado.descripcion}} </td>
-  </ng-container>
+    <ng-container matColumnDef="descripcion">
+      <th mat-header-cell *matHeaderCellDef> ESTADO </th>
+      <td mat-cell *matCellDef="let element"> {{element.estado.descripcion}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="nroOrden">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> # ORDEN </th>
-    <td mat-cell *matCellDef="let element"> {{element.nroOrden}} </td>
-  </ng-container>
+    <ng-container matColumnDef="nroOrden">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> # ORDEN </th>
+      <td mat-cell *matCellDef="let element"> {{element.nroOrden}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="fecha">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA </th>
-    <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
-  </ng-container>
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA </th>
+      <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="modificar">
-    <th mat-header-cell *matHeaderCellDef> MODIFICAR </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button id="modificar" (click)="modificar(element)">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="modificar">
+      <th mat-header-cell *matHeaderCellDef> MODIFICAR </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button id="modificar" (click)="modificar(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="eliminar">
-    <th mat-header-cell *matHeaderCellDef> ELIMINAR </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button id="eliminar" (click)="eliminar(element)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="eliminar">
+      <th mat-header-cell *matHeaderCellDef> ELIMINAR </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button id="eliminar" (click)="eliminar(element)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-  <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-      <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-        <div class="description">
-          <ul>
-            <li>DESCRIPCIÓN: {{ element.descripcion }}</li>
-            <li>
-              CONTACTO: {{ element.usuario.email }} -
-              {{ element.usuario.telefono }}
-            </li>
-            <li>FUENTE: {{ element.fuente }}</li>
-          </ul>
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+        <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="description">
+            <ul>
+              <li>DESCRIPCIÓN: {{ element.descripcion }}</li>
+              <li>
+                CONTACTO: {{ element.usuario.email }} -
+                {{ element.usuario.telefono }}
+              </li>
+              <li>FUENTE: {{ element.fuente }}</li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </td>
-  </ng-container>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
 
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplay" class="example-element-row"
-    [class.example-expanded-row]="expandedElement === element"
-    (click)="expandedElement = expandedElement === element ? null : element"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-</table>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
 
-<div fxLayout fxLayoutAlign="center center">
-  <mat-paginator fxFlex.lt-sm="300px" id="pagina" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+  <div fxLayout fxLayoutAlign="center center">
+    <mat-paginator fxFlex.lt-sm="300px" id="pagina" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>
+<div *ngIf="cargandoTabla" fxLayout fxLayoutAlign="center center">
+  <mat-spinner></mat-spinner>
 </div>
