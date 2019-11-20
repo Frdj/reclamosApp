@@ -143,7 +143,6 @@ export class ReclamosComponent implements OnInit {
     this.cargandoTabla = true;
     this.reclamosService.getReclamos().subscribe(
       (res: Array<Reclamo>) => {
-        this.cargandoTabla = false;
         // se cambia formato de fecha a dd/mm/yyyy
         res.map(reclamo => {
           reclamo.fecha = new Date(reclamo.fecha).toLocaleDateString();
@@ -168,6 +167,7 @@ export class ReclamosComponent implements OnInit {
             data.usuario.nombre.toString().trim().toLowerCase().indexOf(searchString.nombre.toLowerCase()) !== -1 &&
             data.fecha.toString().trim().toLowerCase().indexOf(searchString.fecha.toLowerCase()) !== -1;
         };
+        this.cargandoTabla = false;
         // this.dataSource.filterPredicate = this.customFilterPredicate();
       },
       (err: Error) => {
