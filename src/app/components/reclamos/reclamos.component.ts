@@ -49,9 +49,11 @@ export class ReclamosComponent implements OnInit {
   idFilter = new FormControl();
   nombreFilter = new FormControl();
   fechaFilter = new FormControl();
+  estadoFilter = new FormControl();
+  //globalFilter = '';
 
   filteredValues = {
-    nroOrden: '', id: '', nombre: '', fecha: ''
+    nroOrden: '', id: '', nombre:'', fecha: '', estado: ''
   };
 
   expandedElement: Reclamo | null;
@@ -62,8 +64,7 @@ export class ReclamosComponent implements OnInit {
   constructor(
     public reclamosService: ReclamosService,
     private authService: AuthService,
-    public dialog: MatDialog
-  ) {
+    public dialog: MatDialog) {
     SSO.saveUserToken();
     this.authService.setToken(true);
     const expiracion = JSON.parse(localStorage.getItem('lscache-sso_user')).exp;
@@ -104,16 +105,15 @@ export class ReclamosComponent implements OnInit {
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
 
+    this.estadoFilter.valueChanges.subscribe((estadoFilterValue) => {
+      this.filteredValues['estado'] = estadoFilterValue;
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
   }
 
   applyFilter(filterValue: string) {
-    /*filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;*/
-
     this.globalFilter = filterValue;
     this.dataSource.filter = JSON.stringify(this.filteredValues);
-
   }
 
   eliminar(element: Reclamo) {
@@ -151,9 +151,7 @@ export class ReclamosComponent implements OnInit {
         this.dataSource.data = res;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-
         this.dataSource.filterPredicate = function (data, filter: string): boolean {
-          // return data.id.toString().startsWith(filter) || data.nroOrden.toString().startsWith(filter);
           let globalMatch = !this.globalFilter;
           if (this.globalFilter) {
             // search all text fields
@@ -166,9 +164,20 @@ export class ReclamosComponent implements OnInit {
           return data.nroOrden.toString().trim().indexOf(searchString.nroOrden) !== -1 &&
             data.id.toString().trim().toLowerCase().indexOf(searchString.id.toLowerCase()) !== -1 &&
             data.usuario.nombre.toString().trim().toLowerCase().indexOf(searchString.nombre.toLowerCase()) !== -1 &&
-            data.fecha.toString().trim().toLowerCase().indexOf(searchString.fecha.toLowerCase()) !== -1;
+            data.fecha.toString().trim().toLowerCase().indexOf(searchString.fecha.toLowerCase()) !== -1 &&
+            data.estado.descripcion.toString().trim().toLowerCase().indexOf(searchString.estado.toLowerCase()) !== -1;
         };
-        // this.dataSource.filterPredicate = this.customFilterPredicate();
+        this.dataSource.sortingDataAccessor = (item, property): string | number => {
+          switch (property) {
+            case 'fecha': 
+              let fechaArray = item.fecha.split("/");
+              let dia = parseInt(fechaArray[0]);
+              let mes = parseInt(fechaArray[1]);
+              let anio = parseInt(fechaArray[2]);
+             return (anio*10000) + (mes*100) + dia
+            default: return item[property];
+          }
+        };
       },
       (err: Error) => {
         this.cargandoTabla = false;
@@ -183,25 +192,5 @@ export class ReclamosComponent implements OnInit {
         console.log(res);
         this.getReclamos();
       });
-  }
-
-  customFilterPredicate() {
-    const myFilterPredicate = (data, filter: string): boolean => {
-      let globalMatch = !this.globalFilter;
-
-      if (this.globalFilter) {
-        // search all text fields
-        globalMatch = data.name.toString().trim().toLowerCase().indexOf(this.globalFilter.toLowerCase()) !== -1;
-      }
-
-      if (!globalMatch) {
-        return;
-      }
-
-      const searchString = JSON.parse(filter);
-      return data.position.toString().trim().indexOf(searchString.position) !== -1 &&
-        data.name.toString().trim().toLowerCase().indexOf(searchString.name.toLowerCase()) !== -1;
-    };
-    return myFilterPredicate;
   }
 }
