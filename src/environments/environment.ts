@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost:3000/reclamo'//'https://integracion-aplicaciones.herokuapp.com/reclamo'
+  url: 'https://integracion-aplicaciones.herokuapp.com/reclamo' //'http://localhost:3000/reclamo'
 };
 
 // https://integracion-aplicaciones.herokuapp.com/reclamo
