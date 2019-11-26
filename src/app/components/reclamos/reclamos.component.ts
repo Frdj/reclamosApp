@@ -43,6 +43,7 @@ export class ReclamosComponent implements OnInit {
   dataSource: MatTableDataSource<Reclamo> = new MatTableDataSource<Reclamo>(
     this.reclamos
   );
+  estados = ['Ingresado', 'Retiro Pendiente', 'Finalizado', 'Cancelado', 'No Retirado'];
   columnsToDisplay = ['id', 'nombre', 'descripcion', 'nroOrden', 'fecha', 'modificar', 'eliminar'];
   /* Para filtrar por columna */
   orderFilter = new FormControl();
@@ -50,10 +51,9 @@ export class ReclamosComponent implements OnInit {
   nombreFilter = new FormControl();
   fechaFilter = new FormControl();
   estadoFilter = new FormControl();
-  //globalFilter = '';
 
   filteredValues = {
-    nroOrden: '', id: '', nombre:'', fecha: '', estado: ''
+    nroOrden: '', id: '', nombre: '', fecha: '', estado: ''
   };
 
   expandedElement: Reclamo | null;
@@ -169,12 +169,12 @@ export class ReclamosComponent implements OnInit {
         };
         this.dataSource.sortingDataAccessor = (item, property): string | number => {
           switch (property) {
-            case 'fecha': 
+            case 'fecha':
               let fechaArray = item.fecha.split("/");
               let dia = parseInt(fechaArray[0]);
               let mes = parseInt(fechaArray[1]);
               let anio = parseInt(fechaArray[2]);
-             return (anio*10000) + (mes*100) + dia
+              return (anio * 10000) + (mes * 100) + dia
             default: return item[property];
           }
         };
