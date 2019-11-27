@@ -70,7 +70,7 @@ export class ReclamosComponent implements OnInit {
     public reclamosService: ReclamosService,
     private authService: AuthService,
     public dialog: MatDialog) {
-    // SSO.saveUserToken();
+    SSO.saveUserToken();
     this.authService.setToken(true);
     const expiracion = JSON.parse(localStorage.getItem('lscache-sso_user')).exp;
     this.authService.autoLogout(expiracion * 1000 - new Date().getTime());
@@ -194,6 +194,7 @@ export class ReclamosComponent implements OnInit {
       },
       (err: Error) => {
         this.cargandoTabla = false;
+        loadingModal.close();
         swal('Error al obtener reclamos', err.message, 'error');
       }
     );
