@@ -50,12 +50,14 @@ export class ModificarReclamoComponent implements OnInit {
 
   modificar() {
     this.reclamo.fecha = new Date().toLocaleDateString();
-    console.log(this.reclamo.fecha);
     this.reclamoService.update(this.reclamo.id, this.reclamo)
       .subscribe(res => {
         swal('Reclamo modificado con éxito', '', 'success');
         this.dialogRef.close();
-      });
+      },
+        (err: Error) => {
+          swal('Error al modificar el reclamo', err.message, 'error');
+        });
   }
 
 }

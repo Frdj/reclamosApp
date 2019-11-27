@@ -135,7 +135,10 @@ export class ReclamosComponent implements OnInit {
       .then(borrar => {
         if (borrar) {
           this.reclamosService.delete(element.id).subscribe(
-            (res: Reclamo) => this.getReclamos()
+            (res: Reclamo) => this.getReclamos(),
+            (err: Error) => {
+              swal('Error al eliminar el reclamo', err.message, 'error');
+            }
           );
         }
       });
