@@ -15,6 +15,7 @@ import { ReclamosService } from './services/reclamos/reclamos.service';
 import { LogoutComponent } from './components/logout/logout.component';
 import { LoginComponent } from './components/login/login.component';
 import { ModificarReclamoComponent } from './components/modificar-reclamo/modificar-reclamo.component';
+import { UpdatingModalComponent } from './components/updating-modal/updating-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ModificarReclamoComponent } from './components/modificar-reclamo/modifi
     CrearReclamoComponent,
     ReclamosComponent,
     LoginComponent,
-    ModificarReclamoComponent
+    ModificarReclamoComponent,
+    UpdatingModalComponent
   ],
   imports: [
     AppRoutingModule,
@@ -42,7 +44,8 @@ import { ModificarReclamoComponent } from './components/modificar-reclamo/modifi
   bootstrap: [AppComponent],
   entryComponents: [
     CrearReclamoComponent,
-    ModificarReclamoComponent
+    ModificarReclamoComponent,
+    UpdatingModalComponent
   ]
 })
 export class AppModule { }

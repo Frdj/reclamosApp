@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
-
+import { interval, timer } from 'rxjs';
 import {
   animate,
   state,
@@ -17,8 +17,13 @@ import { Reclamo } from 'src/app/models/reclamo';
 import { SSO } from 'src/app/global/sso';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ModificarReclamoComponent } from '../modificar-reclamo/modificar-reclamo.component';
+import { UpdatingModalComponent } from '../updating-modal/updating-modal.component';
 
 declare var swal: any;
+
+export interface DialogData {
+  message: string;
+}
 
 @Component({
   selector: 'app-reclamos',
@@ -72,7 +77,11 @@ export class ReclamosComponent implements OnInit {
   }
 
   ngOnInit() {
+    const contador = interval(30000);
     this.getReclamos();
+    contador.subscribe((n) => {
+      this.recargar();
+    });
     // Me subscribo ante el agregado de un reclamo en la tabla
     this.reclamosService.currentReclamo.subscribe((reclamo: Reclamo) => {
       if (reclamo) {
@@ -140,9 +149,13 @@ export class ReclamosComponent implements OnInit {
   }
 
   getReclamos() {
+    console.log('Obteniendo reclamos...');
     this.cargandoTabla = true;
+    const loadingModal = this.openDialog();
     this.reclamosService.getReclamos().subscribe(
       (res: Array<Reclamo>) => {
+        console.log(res);
+        loadingModal.close();
         // se cambia formato de fecha a dd/mm/yyyy
         this.cargandoTabla = false;
         res.map(reclamo => {
@@ -188,9 +201,17 @@ export class ReclamosComponent implements OnInit {
 
   recargar() {
     this.reclamosService.recargar()
-      .subscribe(res => {
-        console.log(res);
+      .subscribe(() => {
         this.getReclamos();
       });
+  }
+
+  openDialog(): MatDialogRef<UpdatingModalComponent> {
+    const dialogRef = this.dialog.open(UpdatingModalComponent, {
+      disableClose: true,
+      width: '250px',
+      data: 'Actualizando reclamos'
+    });
+    return dialogRef;
   }
 }

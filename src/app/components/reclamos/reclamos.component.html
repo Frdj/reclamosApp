@@ -22,6 +22,7 @@
   </form>
 </div>
 
+<!-- <div *ngIf="!cargandoTabla"> -->
 <table mat-table id="tablaReclamos" [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
 
   <ng-container matColumnDef="id">
@@ -97,7 +98,8 @@
   <mat-paginator fxFlex.lt-sm="300px" id="pagina" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons>
   </mat-paginator>
 </div>
+<!-- </div> -->
 
-<div *ngIf="cargandoTabla" fxLayout fxLayoutAlign="center center">
+<!-- <div *ngIf="cargandoTabla" fxLayout fxLayoutAlign="center center">
   <mat-spinner></mat-spinner>
-</div>
+</div> -->
